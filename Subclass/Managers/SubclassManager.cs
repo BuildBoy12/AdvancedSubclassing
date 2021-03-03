@@ -1,4 +1,8 @@
-﻿namespace Subclass.Managers
+﻿// <copyright file="SubclassManager.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Managers
 {
     using System;
     using System.Collections.Generic;

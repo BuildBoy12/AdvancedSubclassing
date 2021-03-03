@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Disarm.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Collections.Generic;
@@ -8,15 +12,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The disarm ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Disarm : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "disarm";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Disarms the player you're looking at or players around you.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             response = string.Empty;

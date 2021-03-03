@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Summon.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Collections.Generic;
@@ -8,17 +12,24 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The summon ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Summon : ICommand
     {
         private static readonly System.Random Random = new System.Random();
 
+        /// <inheritdoc/>
         public string Command { get; } = "summon";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Summon zombies from the spectators, if you have the summon ability.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

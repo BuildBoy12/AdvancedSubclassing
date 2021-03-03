@@ -1,4 +1,8 @@
-﻿namespace Subclass.Commands
+﻿// <copyright file="GiveSubclass.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Commands
 {
     using System;
     using CommandSystem;
@@ -6,17 +10,24 @@
     using Exiled.Permissions.Extensions;
     using RemoteAdmin;
 
+    /// <summary>
+    /// Command to grant a user a subclass.
+    /// </summary>
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class GiveSubclass : ICommand
     {
         private static readonly Random Random = new Random();
 
+        /// <inheritdoc/>
         public string Command { get; } = "subclass";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = { "gsc" };
 
+        /// <inheritdoc/>
         public string Description { get; } = "Gives a player a subclass";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (sender is PlayerCommandSender player)

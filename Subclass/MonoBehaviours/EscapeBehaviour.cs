@@ -1,4 +1,8 @@
-﻿namespace Subclass.MonoBehaviours
+﻿// <copyright file="EscapeBehaviour.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.MonoBehaviours
 {
     using Exiled.API.Features;
     using Mirror;

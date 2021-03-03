@@ -1,5 +1,11 @@
-﻿namespace Subclass.Events.EventArgs
+﻿// <copyright file="ReceivedSubclassEventArgs.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Events.EventArgs
 {
+#pragma warning disable SA1101
+
     using Exiled.API.Features;
 
     /// <summary>
@@ -14,8 +20,8 @@
         /// <param name="subClass">The <see cref="SubClass"/> the player got.</param>
         public ReceivedSubclassEventArgs(Player player, SubClass subClass)
         {
-            this.Player = player;
-            this.Subclass = subClass;
+            Player = player;
+            Subclass = subClass;
         }
 
         public Player Player { get; }

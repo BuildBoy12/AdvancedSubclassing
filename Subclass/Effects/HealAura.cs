@@ -1,5 +1,11 @@
-﻿namespace Subclass.Effects
+﻿// <copyright file="HealAura.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Effects
 {
+#pragma warning disable SA1101
+
     using System.Collections.Generic;
     using System.Linq;
     using CustomPlayerEffects;
@@ -7,6 +13,9 @@
     using Mirror;
     using UnityEngine;
 
+    /// <summary>
+    /// The HealAura effect.
+    /// </summary>
     public class HealAura : PlayerEffect
     {
         private readonly Player player;
@@ -18,13 +27,23 @@
         private readonly bool affectAllies;
         private readonly bool affectEnemies;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HealAura"/> class.
+        /// </summary>
+        /// <param name="hub">The <see cref="ReferenceHub"/> of the user.</param>
+        /// <param name="healthPerTick">The amount of health dealt per tick.</param>
+        /// <param name="radius">The range of the effect.</param>
+        /// <param name="affectSelf">If the effect should affect the user.</param>
+        /// <param name="affectAllies">If the effect should affect the user's allies.</param>
+        /// <param name="affectEnemies">If the effect should affect the user's enemies.</param>
+        /// <param name="tickRate">The amount of time between each tick.</param>
         public HealAura(ReferenceHub hub, float healthPerTick = 5f, float radius = 4f, bool affectSelf = true, bool affectAllies = true, bool affectEnemies = false, float tickRate = 5f)
         {
-            this.player = Player.Get(hub);
+            player = Player.Get(hub);
 
-            this.Hub = hub;
-            this.TimeBetweenTicks = tickRate;
-            this.TimeLeft = tickRate;
+            Hub = hub;
+            TimeBetweenTicks = tickRate;
+            TimeLeft = tickRate;
 
             this.healthPerTick = healthPerTick;
             this.radius = radius;
@@ -33,6 +52,7 @@
             this.affectEnemies = affectEnemies;
         }
 
+        /// <inheritdoc/>
         public override void PublicUpdate()
         {
             if (!NetworkServer.active)
@@ -40,21 +60,21 @@
                 return;
             }
 
-            if (this.Enabled)
+            if (Enabled)
             {
-                this.TimeLeft -= Time.deltaTime;
-                if (this.TimeLeft <= 0f)
+                TimeLeft -= Time.deltaTime;
+                if (TimeLeft <= 0f)
                 {
-                    this.TimeLeft += this.TimeBetweenTicks;
-                    IEnumerable<Player> players = Physics.OverlapSphere(this.Hub.transform.position, this.radius).Where(t => Player.Get(t.gameObject) != null).Select(t => Player.Get(t.gameObject)).Distinct();
+                    TimeLeft += TimeBetweenTicks;
+                    IEnumerable<Player> players = Physics.OverlapSphere(Hub.transform.position, radius).Where(t => Player.Get(t.gameObject) != null).Select(t => Player.Get(t.gameObject)).Distinct();
                     foreach (Player p in players)
                     {
-                        if ((!this.affectEnemies && p.Team != this.player.Team) || (p.Id != this.player.Id && !this.affectAllies && p.Team == this.player.Team))
+                        if ((!affectEnemies && p.Team != player.Team) || (p.Id != player.Id && !affectAllies && p.Team == player.Team))
                         {
                             continue;
                         }
 
-                        if (p.Id == this.player.Id && !this.affectSelf)
+                        if (p.Id == player.Id && !affectSelf)
                         {
                             continue;
                         }
@@ -69,9 +89,9 @@
                             continue;
                         }
 
-                        if (p.Health + this.healthPerTick < p.MaxHealth)
+                        if (p.Health + healthPerTick < p.MaxHealth)
                         {
-                            p.Health += this.healthPerTick;
+                            p.Health += healthPerTick;
                         }
                         else
                         {
@@ -82,7 +102,7 @@
             }
             else
             {
-                this.TimeLeft = this.TimeBetweenTicks;
+                TimeLeft = TimeBetweenTicks;
             }
         }
     }

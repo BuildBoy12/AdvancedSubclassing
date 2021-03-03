@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Grenade.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using CommandSystem;
@@ -6,15 +10,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The grenade ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Grenade : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "grenade";
 
-        public string[] Aliases { get; } = { };
+        /// <inheritdoc/>
+        public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Spawn a frag grenade, if you have the grenade ability.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

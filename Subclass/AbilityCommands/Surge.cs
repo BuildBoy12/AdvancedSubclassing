@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Surge.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using CommandSystem;
@@ -6,15 +10,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The surge ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Surge : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "surge";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Start a local power surge, if you have the power surge ability.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

@@ -1,4 +1,8 @@
-﻿namespace Subclass.Patches
+﻿// <copyright file="PlayerInteract.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Patches
 {
     using Exiled.API.Features;
     using HarmonyLib;

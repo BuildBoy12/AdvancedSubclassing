@@ -1,5 +1,11 @@
-﻿namespace Subclass.Events.EventArgs
+﻿// <copyright file="ReceivingSubclassEventArgs.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Events.EventArgs
 {
+#pragma warning disable SA1101
+
     using Exiled.API.Features;
 
     /// <summary>
@@ -15,9 +21,9 @@
         /// <param name="isAllowed">Whether or not this player should receive the subclass.</param>
         public ReceivingSubclassEventArgs(Player player, SubClass subClass, bool isAllowed = true)
         {
-            this.Player = player;
-            this.Subclass = subClass;
-            this.IsAllowed = isAllowed;
+            Player = player;
+            Subclass = subClass;
+            IsAllowed = isAllowed;
         }
 
         public Player Player { get; }

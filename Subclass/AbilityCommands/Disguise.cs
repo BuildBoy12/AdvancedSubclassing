@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Disguise.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Collections.Generic;
@@ -11,15 +15,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The disguise ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Disguise : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "disguise";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Enter a disguise, if you have the disguise ability.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

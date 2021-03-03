@@ -1,4 +1,8 @@
-﻿namespace Subclass.Handlers
+﻿// <copyright file="Server.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Handlers
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +14,9 @@
     using UnityEngine;
     using EPlayer = Exiled.API.Features.Player;
 
+    /// <summary>
+    /// Event handlers for <see cref="Exiled.Events.Handlers.Server"/>.
+    /// </summary>
     public class Server
     {
         private static readonly System.Random Random = new System.Random();
@@ -37,7 +44,6 @@
 
         public void OnRoundEnded(RoundEndedEventArgs ev)
         {
-            // I may just consider using reflection and just loop over all members and clear them if I can.
             TrackingAndMethods.KillAllCoroutines();
             TrackingAndMethods.Coroutines.Clear();
             TrackingAndMethods.PlayersWithSubclasses.Clear();

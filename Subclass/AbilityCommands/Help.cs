@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Help.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Linq;
@@ -6,15 +10,22 @@
     using Exiled.API.Features;
     using RemoteAdmin;
 
+    /// <summary>
+    /// The help command for the current subclass.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Help : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "schelp";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Get help on your current subclass, or any subclass";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

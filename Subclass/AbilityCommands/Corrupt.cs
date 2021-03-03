@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Corrupt.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Collections.Generic;
@@ -9,15 +13,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The Corrupt ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Corrupt : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "corrupt";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Slows players around you.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             response = string.Empty;

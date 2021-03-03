@@ -1,4 +1,8 @@
-﻿namespace Subclass.Patches
+﻿// <copyright file="PlayerEffectPatches.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Patches
 {
     using CustomPlayerEffects;
     using Exiled.API.Features;
@@ -31,12 +35,12 @@
             if (!TrackingAndMethods.PlayersWithSubclasses.ContainsKey(player) || !TrackingAndMethods
                 .PlayersWithSubclasses[player].Abilities.Contains(AbilityType.InvisibleUntilInteract))
             {
-                // Log.Debug($"Player {player.Nickname} does not have subclass or invibility", Subclass.Instance.Config.Debug);
+                // Log.Debug($"Player {player.Nickname} does not have subclass or invisibility", Subclass.Instance.Config.Debug);
                 return true;
             }
 
             float cooldown = TrackingAndMethods.PlayersWithSubclasses[player].AbilityCooldowns[AbilityType.InvisibleUntilInteract];
-            player.Broadcast((ushort)Mathf.Clamp(cooldown / 2, 0.5f, 3), TrackingAndMethods.PlayersWithSubclasses[player].StringOptions["AbilityCooldownMessage"].Replace("{ability}", "invisibility").Replace("{seconds}", (cooldown).ToString()));
+            player.Broadcast((ushort)Mathf.Clamp(cooldown / 2, 0.5f, 3), TrackingAndMethods.PlayersWithSubclasses[player].StringOptions["AbilityCooldownMessage"].Replace("{ability}", "invisibility").Replace("{seconds}", cooldown.ToString()));
             Timing.CallDelayed(cooldown, () =>
             {
                 if (TrackingAndMethods.PlayersWithSubclasses.ContainsKey(player) &&

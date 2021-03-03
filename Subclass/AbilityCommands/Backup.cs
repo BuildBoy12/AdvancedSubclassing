@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Backup.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using System.Collections.Generic;
@@ -8,17 +12,24 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The backup ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Backup : ICommand
     {
         private static readonly System.Random Random = new System.Random();
 
+        /// <inheritdoc/>
         public string Command { get; } = "backup";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Call for backup, if you have the backup ability.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(((PlayerCommandSender)sender).SenderId);

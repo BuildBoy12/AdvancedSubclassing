@@ -1,11 +1,14 @@
-﻿namespace Subclass
+﻿// <copyright file="TrackingAndMethods.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using CustomPlayerEffects;
-    using Effects;
     using Exiled.API.Enums;
     using Exiled.API.Extensions;
     using Exiled.API.Features;
@@ -13,18 +16,26 @@
     using Exiled.Permissions.Extensions;
     using Interactables.Interobjects.DoorUtils;
     using MEC;
-    using MonoBehaviours;
+    using Subclass.Effects;
+    using Subclass.MonoBehaviours;
     using UnityEngine;
 
+    /// <summary>
+    /// The class which tracks the majority of data and contains a majority of the used methods.
+    /// </summary>
     public static class TrackingAndMethods
     {
+        /// <summary>
+        /// A <see cref="List{T}"/> of <see cref="CoroutineHandle"/>s to be handled.
+        /// </summary>
         public static readonly List<CoroutineHandle> Coroutines = new List<CoroutineHandle>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly Dictionary<RoleType, int> RolesForClass = new Dictionary<RoleType, int>();
 
         public static readonly Dictionary<SubClass, int> SubClassesSpawned = new Dictionary<SubClass, int>();
-
-        public static Dictionary<Player, SubClass> PlayersWithSubclasses = new Dictionary<Player, SubClass>();
 
         public static readonly Dictionary<Player, Dictionary<AbilityType, float>> Cooldowns = new Dictionary<Player, Dictionary<AbilityType, float>>();
 
@@ -32,10 +43,8 @@
 
         public static readonly Dictionary<Player, float> PlayersThatBypassedTeslaGates = new Dictionary<Player, float>();
 
-        public static Dictionary<Player, float> PlayersThatJustGotAClass = new Dictionary<Player, float>();
-
         public static readonly Dictionary<Player, int> Zombie106Kills = new Dictionary<Player, int>();
-
+        
         public static readonly Dictionary<Player, List<Player>> PlayersWithZombies = new Dictionary<Player, List<Player>>();
 
         public static readonly Dictionary<Player, RoleType> PreviousRoles = new Dictionary<Player, RoleType>();
@@ -46,15 +55,12 @@
         public static readonly List<Player> FriendlyFired = new List<Player>();
 
         public static readonly List<Player> PlayersInvisibleByCommand = new List<Player>();
+
         public static readonly List<Player> PlayersVenting = new List<Player>();
 
         public static readonly List<Player> PlayersBloodLusting = new List<Player>();
 
         public static readonly List<string> QueuedCassieMessages = new List<string>();
-
-        public static float RoundStartedAt = 0f;
-
-        public static List<Player> NextSpawnWave = new List<Player>();
 
         public static readonly Dictionary<RoleType, SubClass> NextSpawnWaveGetsRole = new Dictionary<RoleType, SubClass>();
 
@@ -67,9 +73,22 @@
 
         public static readonly List<Tuple<MethodInfo, MethodInfo>> CustomWeaponGetters = new List<Tuple<MethodInfo, MethodInfo>>();
 
+        public static Dictionary<Player, SubClass> PlayersWithSubclasses = new Dictionary<Player, SubClass>();
+
+        public static Dictionary<Player, float> PlayersThatJustGotAClass = new Dictionary<Player, float>();
+
+        public static float RoundStartedAt = 0f;
+
+        public static List<Player> NextSpawnWave = new List<Player>();
+
         private static readonly System.Random Random = new System.Random();
 
-
+        /// <summary>
+        /// Determines if the user should be granted a subclass.
+        /// </summary>
+        /// <param name="player">The <see cref="Player"/> object of the user.</param>
+        /// <param name="is035">If the user is an instance of Scp035.</param>
+        /// <param name="escaped">If the user just escaped.</param>
         public static void MaybeAddRoles(Player player, bool is035 = false, bool escaped = false)
         {
             if (!Round.IsStarted || IsGhost(player))
@@ -113,6 +132,15 @@
             }
         }
 
+        /// <summary>
+        /// Adds a <see cref="SubClass"/> to a user.
+        /// </summary>
+        /// <param name="player">The <see cref="Player"/> object of the user.</param>
+        /// <param name="subClass">The <see cref="SubClass"/> to grant to the user.</param>
+        /// <param name="is035">If the user is an instance of Scp035.</param>
+        /// <param name="lite">If the role change was considered to be lite.</param>
+        /// <param name="escaped">If the user just escaped.</param>
+        /// <param name="disguised">If the user is disguised.</param>
         public static void AddClass(Player player, SubClass subClass, bool is035 = false, bool lite = false, bool escaped = false, bool disguised = false)
         {
             if (player == null)
@@ -163,7 +191,7 @@
                 copy.StringOptions["GotClassMessage"] = subClass.StringOptions["GotClassMessage"] + " You are SCP-035.";
                 copy.CantDamageRoles.Clear();
 
-                subClass = new SubClass(copy.Name + "-SCP-035 (p)", copy.AffectsRoles, copy.StringOptions, copy.BoolOptions, copy.IntOptions, copy.FloatOptions, copy.SpawnLocations, copy.SpawnItems, new Dictionary<AmmoType, int> { { AmmoType.Nato556, -1 }, { AmmoType.Nato762, -1 }, { AmmoType.Nato9, -1 } }, copy.Abilities, copy.AbilityCooldowns, copy.AdvancedFFRules, copy.OnHitEffects, copy.OnSpawnEffects, copy.RolesThatCantDamage, "SCP", RoleType.None, null, subClass.OnDamagedEffects);
+                subClass = new SubClass(copy.Name + "-SCP-035 (p)", copy.AffectsRoles, copy.StringOptions, copy.BoolOptions, copy.IntOptions, copy.FloatOptions, copy.SpawnLocations, copy.SpawnItems, new Dictionary<AmmoType, int> { { AmmoType.Nato556, -1 }, { AmmoType.Nato762, -1 }, { AmmoType.Nato9, -1 } }, copy.Abilities, copy.AbilityCooldowns, copy.AdvancedFriendlyFireRules, copy.OnHitEffects, copy.OnSpawnEffects, copy.RolesThatCantDamage, "SCP", RoleType.None, null, subClass.OnDamagedEffects);
             }
 
             if (NextSpawnWave.Contains(player) && NextSpawnWaveGetsRole.ContainsKey(player.Role) &&
@@ -951,7 +979,7 @@
                 SubClass targetClass = PlayersWithSubclasses.ContainsKey(target) ? PlayersWithSubclasses[target] : null;
 
                 Log.Debug($"Checking classes", Plugin.Instance.Config.Debug);
-                if (attackerClass != null && targetClass != null && attackerClass.AdvancedFFRules.Contains(targetClass.Name))
+                if (attackerClass != null && targetClass != null && attackerClass.AdvancedFriendlyFireRules.Contains(targetClass.Name))
                 {
                     return true;
                 }
@@ -1491,7 +1519,7 @@
                 return false;
             }
 
-            return (bool)assembly.GetType("GhostSpectator.API")?.GetMethod("IsGhost")?.Invoke(null, new object[]{ player });
+            return (bool)assembly.GetType("GhostSpectator.API")?.GetMethod("IsGhost")?.Invoke(null, new object[] { player });
         }
 
         private static void TheyMultiply(Player player, SubClass subClass)

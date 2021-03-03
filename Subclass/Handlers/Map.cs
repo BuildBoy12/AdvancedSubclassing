@@ -1,4 +1,8 @@
-﻿namespace Subclass.Handlers
+﻿// <copyright file="Map.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Handlers
 {
     using System.Linq;
     using Exiled.API.Features;
@@ -6,6 +10,9 @@
     using UnityEngine;
     using EPlayer = Exiled.API.Features.Player;
 
+    /// <summary>
+    /// Event handlers for <see cref="Exiled.Events.Handlers.Map"/>.
+    /// </summary>
     public class Map
     {
         public static void OnExplodingGrenade(ExplodingGrenadeEventArgs ev)

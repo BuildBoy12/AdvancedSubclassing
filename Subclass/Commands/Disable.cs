@@ -1,19 +1,30 @@
-﻿namespace Subclass.Commands
+﻿// <copyright file="Disable.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Commands
 {
     using System;
     using CommandSystem;
     using Exiled.Permissions.Extensions;
     using RemoteAdmin;
 
+    /// <summary>
+    /// Command to disable subclasses.
+    /// </summary>
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Disable : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "disablesubclass";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = { "dsc" };
 
+        /// <inheritdoc/>
         public string Description { get; } = "Disables subclasses.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (sender is PlayerCommandSender player)

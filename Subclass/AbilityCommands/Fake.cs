@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Fake.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using CommandSystem;
@@ -9,15 +13,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The fake ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Fake : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "fake";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Fakes your death for a small period of time.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             response = string.Empty;
@@ -46,7 +57,7 @@
                 return true;
             }
 
-            Role role = player.ReferenceHub.characterClassManager.Classes.SafeGet((int) player.Role);
+            Role role = player.ReferenceHub.characterClassManager.Classes.SafeGet((int)player.Role);
             if (role.model_ragdoll == null)
             {
                 return false;

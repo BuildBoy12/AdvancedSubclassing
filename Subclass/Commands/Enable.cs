@@ -1,19 +1,30 @@
-﻿namespace Subclass.Commands
+﻿// <copyright file="Enable.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Commands
 {
     using System;
     using CommandSystem;
     using Exiled.Permissions.Extensions;
     using RemoteAdmin;
 
+    /// <summary>
+    /// Command to enable subclasses.
+    /// </summary>
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class Enable : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "enablesubclass";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = { "esc" };
 
+        /// <inheritdoc/>
         public string Description { get; } = "Enables subclasses.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             if (sender is PlayerCommandSender player)

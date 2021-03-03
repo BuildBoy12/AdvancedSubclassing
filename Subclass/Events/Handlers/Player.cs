@@ -1,7 +1,11 @@
-﻿namespace Subclass.Events.Handlers
+﻿// <copyright file="Player.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Events.Handlers
 {
-    using EventArgs;
     using Exiled.Events.Extensions;
+    using Subclass.Events.EventArgs;
     using static Exiled.Events.Events;
 
     public static class Player

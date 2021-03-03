@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="Punch.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using CommandSystem;
@@ -6,15 +10,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The punch ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Punch : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "punch";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Punch the player you're looking at.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             response = string.Empty;

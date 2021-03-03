@@ -1,4 +1,8 @@
-﻿namespace Subclass
+﻿// <copyright file="Config.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -38,7 +42,7 @@
             [RoleType.Scp173] = 0f,
             [RoleType.Scp93953] = 0f,
             [RoleType.Scp93989] = 0f,
-            [RoleType.Tutorial] = 0f
+            [RoleType.Tutorial] = 0f,
         };
 
         [Description("The separator for spawn parameter arguments. Set this to (a) character(s) that are unique in class names, team names, etc.")]

@@ -1,11 +1,14 @@
-﻿namespace Subclass.Handlers
+﻿// <copyright file="Player.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Handlers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using CustomPlayerEffects;
-    using Effects;
     using Exiled.API.Features;
     using Exiled.Events.EventArgs;
     using Exiled.Loader;
@@ -14,10 +17,14 @@
     using Interactables.Interobjects.DoorUtils;
     using MEC;
     using Mirror;
+    using Subclass.Effects;
     using UnityEngine;
     using EMap = Exiled.API.Features.Map;
     using EPlayer = Exiled.API.Features.Player;
 
+    /// <summary>
+    /// Event handlers for <see cref="Exiled.Events.Handlers.Player"/>.
+    /// </summary>
     public class Player
     {
         private static readonly System.Random Random = new System.Random();

@@ -1,5 +1,11 @@
-﻿namespace Subclass.Patches
+﻿// <copyright file="Scp096Patches.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.Patches
 {
+#pragma warning disable SA1118
+
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection.Emit;
@@ -25,27 +31,21 @@
             newInstructions.InsertRange(offset, new[]
             {
                 new CodeInstruction(OpCodes.Ldloc_3),
-                new CodeInstruction(OpCodes.Call,
-                    Method(typeof(Player), nameof(Player.Get), new[] {typeof(ReferenceHub)})),
+                new CodeInstruction(OpCodes.Call, Method(typeof(Player), nameof(Player.Get), new[] { typeof(ReferenceHub) })),
                 new CodeInstruction(OpCodes.Stloc_S, local.LocalIndex),
                 new CodeInstruction(OpCodes.Ldloc_S, local.LocalIndex),
                 new CodeInstruction(OpCodes.Brfalse_S, ldloc3Label),
-                new CodeInstruction(OpCodes.Ldsfld,
-                    Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
+                new CodeInstruction(OpCodes.Ldsfld, Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
                 new CodeInstruction(OpCodes.Ldloc_S, local.LocalIndex),
-                new CodeInstruction(OpCodes.Callvirt,
-                    Method(typeof(Dictionary<Player, SubClass>), nameof(Dictionary<Player, SubClass>.ContainsKey),
-                        new[] {typeof(Player)})),
+                new CodeInstruction(OpCodes.Callvirt, Method(typeof(Dictionary<Player, SubClass>), nameof(Dictionary<Player, SubClass>.ContainsKey), new[] { typeof(Player) })),
                 new CodeInstruction(OpCodes.Brfalse_S, ldloc3Label),
-                new CodeInstruction(OpCodes.Ldsfld,
-                    Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
+                new CodeInstruction(OpCodes.Ldsfld, Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
                 new CodeInstruction(OpCodes.Ldloc_S, local.LocalIndex),
                 new CodeInstruction(OpCodes.Callvirt, PropertyGetter(typeof(Dictionary<Player, SubClass>), "Item")),
                 new CodeInstruction(OpCodes.Ldfld, Field(typeof(SubClass), nameof(SubClass.Abilities))),
                 new CodeInstruction(OpCodes.Ldc_I4_8),
-                new CodeInstruction(OpCodes.Callvirt,
-                    Method(typeof(List<AbilityType>), nameof(List<AbilityType>.Contains), new[] {typeof(AbilityType)})),
-                new CodeInstruction(OpCodes.Brtrue, ldlocasLabel)
+                new CodeInstruction(OpCodes.Callvirt, Method(typeof(List<AbilityType>), nameof(List<AbilityType>.Contains), new[] { typeof(AbilityType) })),
+                new CodeInstruction(OpCodes.Brtrue, ldlocasLabel),
             });
 
             foreach (var code in newInstructions)
@@ -70,9 +70,9 @@
 
             newInstructions.InsertRange(firstOffset, new[]
             {
-                new CodeInstruction(OpCodes.Call, Method(typeof(Player), nameof(Player.Get), new[] {typeof(UnityEngine.GameObject)})),
+                new CodeInstruction(OpCodes.Call, Method(typeof(Player), nameof(Player.Get), new[] { typeof(UnityEngine.GameObject) })),
                 new CodeInstruction(OpCodes.Stloc_1, player.LocalIndex),
-                new CodeInstruction(OpCodes.Ldloc_0)
+                new CodeInstruction(OpCodes.Ldloc_0),
             });
 
             var secondOffset = newInstructions.FindIndex(i => i.opcode == OpCodes.Ldnull) + 3;
@@ -83,15 +83,15 @@
                 new CodeInstruction(OpCodes.Brfalse_S, continueLabel),
                 new CodeInstruction(OpCodes.Ldsfld, Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
                 new CodeInstruction(OpCodes.Ldloc_1),
-                new CodeInstruction(OpCodes.Callvirt, Method(typeof(Dictionary<Player, SubClass>), nameof(Dictionary<Player, SubClass>.ContainsKey), new[] {typeof(Player)})),
+                new CodeInstruction(OpCodes.Callvirt, Method(typeof(Dictionary<Player, SubClass>), nameof(Dictionary<Player, SubClass>.ContainsKey), new[] { typeof(Player) })),
                 new CodeInstruction(OpCodes.Brfalse_S, continueLabel),
                 new CodeInstruction(OpCodes.Ldsfld, Field(typeof(TrackingAndMethods), nameof(TrackingAndMethods.PlayersWithSubclasses))),
                 new CodeInstruction(OpCodes.Ldloc_1),
                 new CodeInstruction(OpCodes.Callvirt, PropertyGetter(typeof(Dictionary<Player, SubClass>), "Item")),
                 new CodeInstruction(OpCodes.Ldfld, Field(typeof(SubClass), nameof(SubClass.Abilities))),
                 new CodeInstruction(OpCodes.Ldc_I4_8),
-                new CodeInstruction(OpCodes.Callvirt, Method(typeof(List<AbilityType>), nameof(List<AbilityType>.Contains), new[] {typeof(AbilityType)})),
-                new CodeInstruction(OpCodes.Brtrue, returnLabel)
+                new CodeInstruction(OpCodes.Callvirt, Method(typeof(List<AbilityType>), nameof(List<AbilityType>.Contains), new[] { typeof(AbilityType) })),
+                new CodeInstruction(OpCodes.Brtrue, returnLabel),
             };
 
             newInstructions.InsertRange(secondOffset, secondInstructions);

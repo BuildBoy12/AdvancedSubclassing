@@ -1,4 +1,8 @@
-﻿namespace Subclass.AbilityCommands
+﻿// <copyright file="BloodLust.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Subclass.AbilityCommands
 {
     using System;
     using CommandSystem;
@@ -8,15 +12,22 @@
     using RemoteAdmin;
     using UnityEngine;
 
+    /// <summary>
+    /// The BloodLust ability command.
+    /// </summary>
     [CommandHandler(typeof(ClientCommandHandler))]
     public class BloodLust : ICommand
     {
+        /// <inheritdoc/>
         public string Command { get; } = "lust";
 
+        /// <inheritdoc/>
         public string[] Aliases { get; } = Array.Empty<string>();
 
+        /// <inheritdoc/>
         public string Description { get; } = "Enter a bloodlust and gain speed.";
 
+        /// <inheritdoc/>
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             response = string.Empty;

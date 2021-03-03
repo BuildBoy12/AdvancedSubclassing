@@ -4,6 +4,7 @@
 // Licensed under the CC BY-SA 3.0 license.
 // </copyright>
 // -----------------------------------------------------------------------
+
 namespace Subclass.Managers
 {
     using System;
@@ -18,7 +19,7 @@ namespace Subclass.Managers
         private readonly IObjectDescriptor innerDescriptor;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Plugin.Managers.CommentsObjectDescriptor"/> class.
+        /// Initializes a new instance of the <see cref="CommentsObjectDescriptor"/> class.
         /// </summary>
         /// <param name="innerDescriptor">The inner descriptor instance.</param>
         /// <param name="comment">The comment to be written.</param>
