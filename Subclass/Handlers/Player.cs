@@ -357,6 +357,7 @@ namespace Subclass.Handlers
 
         public void OnEscaping(EscapingEventArgs ev)
         {
+            if (!ev.IsAllowed) return;
             bool cuffed = ev.Player.IsCuffed;
             if (TrackingAndMethods.PlayersWithSubclasses.ContainsKey(ev.Player))
             {
